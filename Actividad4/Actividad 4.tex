@@ -1,0 +1,144 @@
+\documentclass{article}
+
+% set font encoding for PDFLaTeX or XeLaTeX
+\usepackage{ifxetex}
+\ifxetex
+  \usepackage{fontspec}
+\else
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{lmodern}
+  \usepackage{float}
+  \usepackage{graphicx}
+  \usepackage{morefloats}
+  \usepackage{wrapfig}
+  \usepackage{babel}
+  \usepackage{enumerate}
+\fi
+
+% used in maketitle
+
+
+% Enable SageTeX to run SageMath code right inside this LaTeX file.
+% documentation: http://mirrors.ctan.org/macros/latex/contrib/sagetex/sagetexpackage.pdf
+% \usepackage{sagetex}
+
+\begin{document}
+\begin{titlepage}
+
+ \begin{center}
+    \vspace*{-1in}
+    \begin{figure}[htb]
+    \begin{center}
+    \includegraphics[width=8cm]{escudo-gde-trans.png}
+    \end{center}
+    \end{figure}
+
+\begin{center}
+LICENCIATURA EN FÍSICA \\
+\vspace*{0.15in}
+DEPARTAMENTO DE FÍSICA \\
+\vspace*{0.6in}
+\begin{large}
+FÍSICA COMPUTACIONAL 1 \\
+\end{large}
+\vspace*{0.2in}
+\rule{80mm}{0.1mm}\\
+\vspace*{0.1in}
+\begin{large}
+\textbf{Reporte 4\\ }
+\end{large}
+\vspace*{0.3in}
+\begin{large}
+Alumna: \\
+\vspace*{0.1in}
+Brambilla Zamorano Fátima Fernanda\\
+\end{large}
+\vspace*{0.3in}
+\rule{80mm}{0.1mm}\\
+\vspace*{0.1in}
+\begin{large}
+Fecha: \\ 28/02/18\\
+\end{large}
+\end{center}
+\end{center}
+\end{titlepage}
+
+\section{Introducción}
+Los sistemas operativos \textit{UNIX} y otros sistemas derivados como lo son Linux y macOS se apoyan con un interprete de comandos llamado \textit{Shell}, el cual juega un papel de intermediario entre el usuario y el sistema operativo. Y aunque hay toda una familia de comandos de interpretación, no mencionaremos muchos en esta ocasión, ya que nos limitaremos a trabajar con el interprete: \textit{/bin/bash} que viene por default en los sistemas previamente mencionados.
+
+\section{Fundamentos}
+Los fundamentos para esta cuarta actividad son los comandos que se en-listaran más adelante, ya que serán necesarios durante la misma, y en las siguientes actividades por venir:
+\begin{itemize}
+\item cat:  Este comando concatena archivos y los muestra en la salida estándar. Combinado con distintas opciones, ejecuta diferentes acciones, por ejemplo:
+	\begin{itemize}
+    \item -b: omite los números de línea para los espacios en blanco en la salida
+    \item -e: un carácter \$ se mostrará al final de cada línea anterior a una nueva línea
+    \item -E: muestra un \$ (símbolo de dolar) al final de cada línea
+    \item -n: numera todas las líneas en la salida
+    \item -s: Si la salida tiene múltiples líneas vacías, las sustituye con una sola línea vacía
+    \item -T: muestra los caracteres de tabulación en la saluda
+    \item -v: los caracteres no mostrados se muestran
+    \end{itemize}
+    No obstante, estas no son las únicas acciones que se pueden llevar a cabo con este comando.
+    \item echo: El comando echo muestra la cadena dada en la entrada en el output estándar.
+	\begin{itemize}
+    \item -e: activa la interpretación de los caracteres alternativos listados debajo
+    \item -E: desactiva la interpretación de esas secuencias en cadenas
+    \end{itemize}
+\item grep: El comando grep selecciona y muestra las líneas de los archivos que coincidan con la cadena o patrón dados. Este comando tiene varias opciones, a continuación se muestran algunas:
+	\begin{itemize}
+    \item -c: Muestra la cuenta de líneas coincidentes
+    \item -e: busca un patrón
+    \item -h: muestra las líneas coincidentes pero no los nombres de archivo
+    \item -r: lee iterativamente todos los archivos en los directorios y subdirectorios encontrados
+    \item -w: coincidencias en palabras completas únicamente
+    \end{itemize}
+\item less: El comando less se usa para mostrar texto en la pantalla de la terminal. Solo muestra el texto del archivo dado, no se puede editar o manipular.
+\item ls: Este comando en lista los archivos y directorios en el directorio de trabajo actual.
+\item wc: Esta instrucción sirve para contar líneas, palabras y caracteres que contiene un archivo.
+
+\item chmod: Este comando nos permite alterar o cambiar los permisos de acceso de un archivo o directorio. Este comando utiliza números del cero al siete para editar los permisos, y la acción de cada uno de los números se puede ver en la siguiente tabla:
+\begin{figure}[htb]
+    \begin{center}
+    \includegraphics[width=8cm]{PA.PNG}
+    \end{center}
+    \end{figure}
+
+\end{itemize}
+
+\section{Procedimiento y Análisis de Datos}
+En primer lugar descargamos un archivo \textit{script1.sh} de la pagina de pbworks del grupo, el cual nos ayudaría a descargar automáticamente los datos meteorologícos de un año de alguna ciudad, desde la pagina de la universidad de Wyoming.\\ Para esto, editamos el archivo script1.sh un poco, cambiando la estación de la cual buscaría la información, así como el código del programa, pues el archivo estaba hecho para descargar los datos de cinco años, pero en nuestro caso solo trabajaríamos con los dados de doce meses. Y una vez editado el archivo, cambiamos los permisos para el usuario en la terminal, pues el archivo solo podía ser leído y editado, sin embargo, no estaban los permisos para correrlo, por lo que nos apoyamos en el comando \textit{chmod} para cambiar los permisos.\\ Al ejecutar el archivo, este empezó a descargar los datos, creando doce archivos nuevos en un carpeta, cada archivo correspondiente a un mes del año.
+Por medio del comando \textit{less} exploramos los datos de uno de los archivos, notando lo amplio que es cada uno de ellos, y con el comando \textit{cat} vimos su contenido. \\ El siguiente paso fue aprender a manejar el comando \textit{grep} el cual funciona para hacer una extración de datos, o buscar ciertos datos de un documento.
+Pero antes de hacer alguna extración de los datos que obtuvimos de la pagina de la universidad, debimos asegurarnos de que todos los archivos descargados eran de cierto tipo, para lo cual nos apoyamos en el comando \textit{file}. Una vez que se verifico que todos los archivos eran en efecto del mismo tiempo, utilizamos el comando cat para concatenar la información de los doce archivos, y ubicarla en uno solo, utilizando el comando de la siguiente manera \textit{cat sounding* > sondeos.txt}, quedando como nombre del archivo: \textit{sondeos.txt}
+Enseguida utilizamos el comando grep para filtrar los datos que queríamos conservar del archivo sondeos.txt recién creado, por medio del siguiente comando: \textit{egrep -v 'PRES|hPa' sondeos.txt | egrep '[estación de servicio y palabras clave]' > df2017.csv} \\ el nuevo archivo creado resulto ser únicamente ciertas lineas de los archivos de datos de cada mes.
+
+\section{Resultados}
+El primer resultado obtenido fue después de correr el script que descargamos desde la pagina de actividades del grupo, pues nos cargo doce archivos, uno por cada mes del año, a la carpeta de trabajo en donde se encontraba dicho script. \\ De ahí, ejecutamos el comando \textit{ls -alg} para ver los archivos de la carpeta de trabajo, donde a su vez podíamos observar los que en efecto teníamos varios archivos nuevos en la carpeta, siendo estos el script y los doce archivos de datos meteorológicos.
+El siguiente resultado que menciono es después de completar hasta el decimoquinto paso de la lista de acciones que debíamos ejecutar de acuerdo a la actividad:
+
+ \begin{figure}[htb]
+    \begin{center}
+    \includegraphics[width=8cm]{ResultadoFinal.PNG}
+    \end{center}
+    \end{figure}
+
+En la imagen anterior se pueden apreciar los datos finales en la carpeta de trabajo, siendo estos doce archivos del tipo \textit{ASCII}, tres scripts del tipo \textit{.sh}, un archivo de texto y un archivo \textit{.csv}
+
+\section{Conclusiones}
+Al finalizar esta práctica aprendimos a hacer varias cosas nuevas, entre ellas el manejo de nuevos comandos que nos facilitan interactuar con el sistema y la edición de archivos desde la terminal. Además de esto, se nos introdujo el editor de emacs de una forma, para la edición de archivos y creación de programas, así como algunos comandos que se utilizan dentro del propio editor, para poder trabajar con fluidez.
+
+\section{Bibliografía}
+\begin{enumerate}
+\item hscripts.com . (s.f.). Obtenido de https://www.hscripts.com/es/tutoriales/linux-commands/passwd.html
+\end{enumerate}
+ 
+\section{Ápendice}
+\begin{enumerate}
+\item ¿Qué fue lo que más te llamo la atención en esta actividad? \\ Lo que más llamo mi atención durante esta práctica fue la introducción a emacs y a los comandos de /bin/bash.
+\item ¿Qué consideras que aprendiste? \\ Considero que aprendí un poco sobre como utilizar el editor de emacs, y es algo que me gustaría reforzar más adelante
+\item ¿Cuales fueron las cosas que más se te dificultaron? \\ Los comandos de /bin/bash, ya que son unos cuantos los que utilizamos y cada uno tiene varias opciones.
+\item ¿Cómo se podría mejorar esta actividad? \\ quizás con una explicación más detallada de los comandos nuevos, antes de empezar a trabajar con ellos.
+\item En general, ¿cómo te sentiste al realizar esta actividad? \\ La palabra más apropiada parece ser "perdida", en algunos momentos no sabía que estaba ocurriendo, así que tuve que recurrir bastante a mis compañeros para algo de orientación.
+\end{enumerate}
+\end{document}
