@@ -1,0 +1,4 @@
+#script para limpiar datos del archivo df2017.csv
+#y solo mantener la fecha, CAPE y el agua precipitada
+
+egrep -v 'PRES|hPa' sondeos.txt | egrep '76225|Showalter|LIFT|SWEAT|K|Totals|CAPE|CINS|LFCT|CAPV|Temp|Pres|thick|Precip' > df2017.csv
