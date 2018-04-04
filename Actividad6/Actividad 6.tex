@@ -1,0 +1,276 @@
+\documentclass{article}
+\usepackage{ifxetex}
+\ifxetex
+  \usepackage{fontspec}
+\else
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{lmodern}
+  \usepackage{float}
+  \usepackage{graphicx}
+  \usepackage{morefloats}
+  \usepackage{wrapfig}
+  \usepackage{babel}
+  \usepackage{enumerate}
+\fi
+\begin{document}
+\begin{titlepage}
+\begin{center}
+    \vspace*{-1in}
+    \begin{figure}[htb]
+    \begin{center}
+    \includegraphics[width=8cm]{escudo-gde-trans.png}
+    \end{center}
+\end{figure}
+\begin{center}
+LICENCIATURA EN FÍSICA \\
+\vspace*{0.15in}
+DEPARTAMENTO DE FÍSICA \\
+\vspace*{0.6in}
+\begin{large}
+FÍSICA COMPUTACIONAL 1 \\
+\end{large}
+\vspace*{0.2in}
+\rule{80mm}{0.1mm}\\
+\vspace*{0.1in}
+\begin{large}
+\textbf{Reporte 6\\ }
+\end{large}
+\vspace*{0.3in}
+\begin{large}
+Alumna: \\
+\vspace*{0.1in}
+Brambilla Zamorano Fátima Fernanda\\
+\end{large}
+\vspace*{0.3in}
+\rule{80mm}{0.1mm}\\
+\vspace*{0.1in}
+\begin{large}
+Fecha: \\ 16/03/18\\
+\end{large}
+\end{center}
+\end{center}
+\end{titlepage}
+
+\section{Coupled spring equations}
+\subsection{Introducción}
+Los métodos clasicos para empezar ecuaciones diferenciales están cambiando rápidamente por técnicas de solución para una variedad de ecuaciones diferenciales, para enfatizar sistemas y aspectos más cualitativos de la teoría de ecuaciones diferenciales ordinarias. En particular, hay un enfasis en las ecuaciones no lineales, debido en gran medida a la amplia disponibilidad de algoritmos númericos altamente poderosos, y a capacidades gráficas que vienen con sistemás algebráicos computacionales, como lo son \textit{Mathematica} y \textit{Maple}.
+En el siguiente articulo se presentará un viejo problema que ahora se utiliza en los libros de texto. Se trata del problema de dos resortes y dos masas atados en serie, y colgando del techo. Bajo la suposición de que que las fuerzas restauradoras se comportan de acuerdo a la Ley de Hooke, este problema de dos grados de libertad esta modelado por dos parejas de ecuaciones diferenciales de segundo orden.
+
+\subsection{The coupled spring model}
+El modelo consiste en dos resortes y dos masas. Un muelle, que tiene una constante elástica k1, esta atado al techo y a un peso con masa m1 en su parte inferior.
+A este peso, se le ata un segundo resorte de constante elástica k2, y así mismo este resorte tiene en su parte inferior atado un peso de masa m2. Como se puede ver en la siguiente figura.
+
+\begin{figure}[htb]
+    \begin{center}
+    \includegraphics[width=6cm]{Figura1.PNG}
+    \end{center}
+\end{figure}
+
+Permitiendo al sistema volver a su posición de equilibrio, medimos el desplazamiento del centro de masa de cada peso desde el equilibrio en función del tiempo, y denotamos estas mediciones como x1(t), y x2(t) respectivamente.
+
+\subsubsection {Asumiendo la Ley de Hooke}
+Bajo la suposición de pequeñas oscilaciones, las fuerzas de restauración son de la forma: -k1L1, y -k2L2, donde L1 y L2 son las elongaciones (o compresiones) de los dos resortes. Dado que la masa superior esta atada a ambos resortes, hay dos fuerzas restauradoras actuando sobre ella: una hacía arriba de la forma -k1x1, ejercida por la elongación (o comprensión) x1 del primer resorte; y otra hacía arriba de la forma -k2(x2 - x1) de la resistencia del segundo resorte a ser comprimido (o elóngado) por la cantidad (x2 - x1). La segunda masa solo "siente" la fuerza restauradora de la elongación (o compresión) del segundo resorte.
+Asumiendo que no hay fricción en el sistema, entonces la ley de Newton implica que las dos ecuaciones que representan el movimiento de las dos masas son las siguientes:
+\begin{equation}
+m1x'1 = -k1x1 - k2*(x2-x1)
+\end{equation}
+\begin{equation}
+m2x'2 = - k2*(x2-x1)
+\end{equation}
+
+Sin embargo, estas ecuaciones no nos son de mucha ayuda para resolver el sistema, por lo que después de un largo procedimiento para obtener un par de ecuaciones que nos sean útiles, llegamos al siguiente sistema:
+\begin{equation}
+x'1 = u
+\end{equation}
+\begin{equation}
+u' = (-k1x1 - k2(x1 - x2))/m1
+\end{equation}
+\begin{equation}
+x'2 = v
+\end{equation}
+\begin{equation}
+v' = (-k2(x2 -x1))/m2
+\end{equation}
+
+\section{Procedimiento}
+Para resolver el sistema de manera númerica, nos apoyamos en \textit{Jupyter Lab}, que es algo diferente al notebook, donde habíamos estado trabajando anteriormente, no obstante, al estar ya familiarizados con su empleo, no hubo ni un problema al empezar a trabajar en la plataforma mencionada.
+En primer lugar, definimos un vector con las ecuaciones previas, para poder trabajar los ejemplos que más adelante se nos pedía resolver y comparar con los resultados mostrados en el archivo de texto.
+\begin{figure}[H]
+    \caption{Celda 1}
+    \includegraphics[width=1\textwidth]{Celda1.PNG}
+    \centering
+    \label{Cod}
+\end{figure}
+
+Después de definir el vector, el cual podía reutilizarse para cada uno de los ejemplos que se resolverían más adelante, en una segunda celda se pusieron las condiciones iniciales y los datos indicados en el ejemplo 3.1 del archivo de texto. En esta celda también se escribió el siguiente código, para que el programa pudiera resolver el problema:
+\begin{figure}[H]
+    \caption{Celda 2}
+    \includegraphics[width=1\textwidth]{Celda2.PNG}
+    \centering
+    \label{Cod}
+\end{figure}
+En la tercera celda, se importaron diferentes bibliotecas para la creación de gráficas, y el guardado de archivos de datos o imágenes, y se escribo el código para crear la primera gráfica, como se muestra en la siguiente figura.
+\begin{figure}[H]
+    \caption{Celda 3}
+    \includegraphics[width=1\textwidth]{Celda3.PNG}
+    \centering
+    \label{Cod}
+\end{figure}
+Las tres figuras anteriores muestran el código base que se uso para cada ejemplo del texto, de modo que a continuación se mostraran los resultados obtenidos, así como los fragmentos de código que se hayan usado a parte para cada ejemplo.
+
+\section{Resultados}
+En primer lugar, se mostrará la gráfica obtenida a partir del código mostrado en la figura 3. En esta gráfica se puede apreciar el comportamiento del sistema de resorte-masa.
+\begin{figure}[H]
+    \caption{Gráfica 1 ejemplo 2.1}
+    \includegraphics[width=0.5\textwidth]{Grafica1.png}
+    \centering
+    \label{Cod}
+\end{figure}
+En seguida, se muestra otro fragmento de código, el cual fue utilizado para obtener una gráfica que mostrará los retratos de fase de x1 y x2.
+\begin{figure}[H]
+    \caption{Celda 4}
+    \includegraphics[width=1\textwidth]{Celda4.PNG}
+    \centering
+    \label{Cod}
+\end{figure}
+Esta sección de código, genero la siguiente gráfica:
+\begin{figure}[H]
+    \caption{Gráfica 2 ejemplo 2.1}
+    \includegraphics[width=0.5\textwidth]{Grafica2.png}
+    \centering
+    \label{Cod}
+\end{figure}
+La siguiente gráfica muestra el comportamiento de x1 contra x2:
+\begin{figure}[H]
+    \caption{Gráfica 3 ejemplo 2.1}
+    \includegraphics[width=0.5\textwidth]{Grafica3.png}
+    \centering
+    \label{Cod}
+\end{figure}
+Ahora, comparando las gráficas obtenidas mediante Jupyter Lab, con las gráficas mostradas en el archivo de texto, las cuales se muestra en la figura 8.
+Se puede apreciar que en este caso las gráficas obtenidas mediante la solución númerica son las mismas que las obtenidas mediante la solución teoríca del archivo de texto.
+\begin{figure}[H]
+    \caption{Gráficas del ejemplo 2.1}
+    \includegraphics[width=0.5\textwidth]{Ejemplo1.PNG}
+    \centering
+    \label{Cod}
+\end{figure}
+
+Siguiendo con los resultados obtenidos para el ejemplo 2.2, se mostrarán sus gráficas, ya que para obtenerlas se utilizaron los mismos códigos mostrados con anterioridad, cambiando únicamente los datos númericos.
+\begin{figure}[H]
+    \caption{Gráfica 1 del ejemplo 2.2}
+    \includegraphics[width=0.5\textwidth]{Grafica4.png}
+    \centering
+    \label{Cod}
+\end{figure}
+Como en el ejemplo anterior, esta primera gráfica representa el comportamiento del sistema resorte-masa, mostrando en distintos colores el comportamiento de la elongación del resorte uno y del resorte dos.
+A continuación se muestra la gráfica del comportamiento de x1 contra x2 para este ejemplo:
+\begin{figure}[H]
+    \caption{Gráfica 2 del ejemplo 2.2}
+    \includegraphics[width=0.5\textwidth]{Grafica5.png}
+    \centering
+    \label{Cod}
+\end{figure}
+Así como en el caso anterior, se puede ver que hay un comportamiento lineal entre ambas, sin embargo, en este ejemplo la pendiente mostrada es de carácter negativo, mientras que en el ejemplo 1 era de carácter positivo. Así como para el ejemplo anterior, también compararemos las gráficas obtenidas con la solución númerica con las esperadas del archivo de texto.
+\begin{figure}[H]
+    \caption{Gráficas del ejemplo 2.2}
+    \includegraphics[width=1\textwidth]{Ejemplo2.PNG}
+    \centering
+    \label{Cod}
+\end{figure}
+Comparando las gráficas obtenidas con las esperadas, se puede ver que son básicamente las mismas, lo que me lleva a pensar que la solución númerica obtenida esta bastante cercana a la solución teórica.
+
+Ahora, pasamos a las gráficas obtenidas para los datos del ejemplo 2.3, como en los casos anteriores se presentará primero la gráfica del comportamiento del sistema resorte-masa
+\begin{figure}[H]
+    \caption{Gráfica 1 del ejemplo 2.3}
+    \includegraphics[width=0.5\textwidth]{Grafica6.png}
+    \centering
+    \label{Cod}
+\end{figure}
+Para este caso, el comportamiento del sistema es ligeramente diferente a los casos anteriores, esto puede deberse a que sus condiciones son bastante diferentes a como lo fueron en los casos anteriores, no obstante, aún puede verse el comportamiento oscilatorio del sistema.
+La figura 13 nos mostrará una gráfica del comportamiento de x1, con respecto a su primera derivada. Mientras que la figura 14 nos mostrará el comportamiento de x2 con respecto a su derivada también.
+\begin{figure}[H]
+    \caption{Gráfica 2 del ejemplo 2.3}
+    \includegraphics[width=0.5\textwidth]{Grafica7.png}
+    \centering
+    \label{Cod}
+\end{figure}
+\begin{figure}[H]
+    \caption{Gráfica 3 del ejemplo 2.3}
+    \includegraphics[width=0.5\textwidth]{Grafica8.png}
+    \centering
+    \label{Cod}
+\end{figure}
+Por último, se presenta la gráfica del comportamiento de x1 contra x2.
+\begin{figure}[H]
+    \caption{Gráfica 4 del ejemplo 2.3}
+    \includegraphics[width=0.5\textwidth]{Grafica9.png}
+    \centering
+    \label{Cod}
+\end{figure}
+Comparando las gráficas obtenidas con las esperadas, notamos una ligera diferencia en las gráficas de los comportamientos de x1 y x2 con respecto a sus derivadas, mientras que las gráficas de x1 contra x2, y la del comportamiento oscilatorio del sistema son las mismas
+\begin{figure}[H]
+    \caption{Gráficas del ejemplo 2.3}
+    \includegraphics[width=0.5\textwidth]{Ejemplo3.PNG}
+    \centering
+    \label{Cod}
+\end{figure}
+
+Por último las gráficas del ejemplo 2.4, como en los casos anteriores se mostrará primero la gráfica del comportamiento oscilatorio del sistema:
+\begin{figure}[H]
+    \caption{Gráfica 1 del ejemplo 2.4}
+    \includegraphics[width=0.5\textwidth]{Grafica10.png}
+    \centering
+    \label{Cod}
+\end{figure}
+La siguiente figura muestra el comportamiento de x1 contra x2, siendo en esta ocasión un movimiento un tanto más difícil de explicar, ya que, a diferencia de los casos anteriores, se tiene un movimiento que se puede considerar asimétrico y "no cerrado" como en el ejemplo 2.3
+\begin{figure}[H]
+    \caption{Gráfica 2 del ejemplo 2.4}
+    \includegraphics[width=0.5\textwidth]{Grafica11.png}
+    \centering
+    \label{Cod}
+\end{figure}
+Las siguientes figuras muestran los comportamientos de x1 y x2 con sus respectivas derivadas, en el mismo orden que se mencionan.
+\begin{figure}[H]
+    \caption{Gráfica 2 del ejemplo 2.4}
+    \includegraphics[width=0.5\textwidth]{Grafica12.png}
+    \centering
+    \label{Cod}
+\end{figure}
+\begin{figure}[H]
+    \caption{Gráfica 3 del ejemplo 2.4}
+    \includegraphics[width=0.5\textwidth]{Grafica13.png}
+    \centering
+    \label{Cod}
+\end{figure}
+En el caso de los comportamientos de x1 y x2 con sus respectivas derivadas, podemos decir lo mismo que se dijo anteriormente sobre la gráfica del comportamiento de x1 contra x2, que no hay simetría en sus movimientos.
+Para finalizar con esta parte, compararemos las gráficas obtenidas con las gráficas esperadas: 
+\begin{figure}[H]
+    \caption{Gráficas del ejemplo 2.4}
+    \includegraphics[width=0.5\textwidth]{Ejemplo4.PNG}
+    \centering
+    \label{Cod}
+\end{figure}
+Comparando estas las gráficas obtenidas por medio de la solución númerica, y las esperadas del archivo de texto, podemos ver que se tratan de las mismas, es decir, como en los casos de los ejemplos anteriores, se obtuvieron los mismos resultados de la solución esperada.
+
+\section{Conclusiones}
+Los métodos númericos para resolver ecuaciones diferenciales, entre otras ecuaciones matemáticas, son una herramienta bastante útil y poderosa, la cual los físicos debemos empezar a dominar para poder emplearlas cómodamente en nuestro trabajo, ya que facilitan la obtención de resultados, que por otros métodos quizás no seríamos capaces de obtener.
+
+\section{Bibliografía}
+\begin{enumerate}
+\item Temple H Fay, S. D. (2002). coupled springs equations. En T. H. Fay, Coupled Springs Equations (pág. 16).
+\item Weckesser, W. (17 de 02 de 2018). SciPhy Cookbook. Obtenido de http://scipy-cookbook.readthedocs.io/items/CoupledSpringMassSystem.html
+\end {enumerate}
+
+\section{Ápendice}
+\begin{itemize}
+\item ¿En general te pareció interesante esta actividad de modelación matemática?, ¿qué te gusto más?, ¿qué no te gusto? \\ Al principio fue un poco difícil definir que era lo que teníamos que hacer, pero fue interesante trabajar en ello
+\item La cantidad de material te pareció ¿bien?, ¿suficiente?, ¿demasiado? \\ Creo que la cantidad de material era justo el necesario
+\item ¿Cuál es tu primera impresión de \textit{Jupyter Lab} ? \\ que no es muy diferente de Jupyter Nootebook, no más allá de la apariencia
+\item Respecto al uso de funciones de SciPy, ¿ya habías visto integración númerica en tus cursos anteriores?, ¿Cuál es tu experiencia? \\ No lo había visto antes, y aunque mi experiencia no fue muy grata (más que nada porque no soy muy amiga de los lenguajes de programación), creo que es una herramienta bastante útil para la resolución de problemas númericos
+\item El tema de masas acopladas con resortes, ¿ya lo habías resuelto en tu curso de Mecánica 2? \\ Si, es un problema que resolvimos teoricamente en el curso de Mecánica II
+\item ¿Qué le agregarías o quitarías a esta actividad para hacerla más interesante o divertida? \\ No le cambiaría nada
+\end{itemize}
+
+\end{document}
