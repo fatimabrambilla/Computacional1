@@ -1,0 +1,89 @@
+\documentclass{article}
+\usepackage{ifxetex}
+\ifxetex
+  \usepackage{fontspec}
+\else
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{lmodern}
+  \usepackage{float}
+  \usepackage{amsmath}
+  \usepackage{graphicx}
+  \usepackage{morefloats}
+  \usepackage{wrapfig}
+  \usepackage[top=1in, bottom=1.25in, left=1.1in, right=1.1in]{geometry}
+\usepackage[dvipsnames]{xcolor}
+  \usepackage{enumerate}
+\fi
+
+\begin{document}
+\begin{titlepage}
+\begin{center}
+    \vspace*{-1in}
+    \begin{figure}[htb]
+    \begin{center}
+    \includegraphics[width=8cm]{escudo-gde-trans.png}
+    \end{center}
+\end{figure}
+\begin{center}
+LICENCIATURA EN FÍSICA \\
+\vspace*{0.15in}
+DEPARTAMENTO DE FÍSICA \\
+\vspace*{0.6in}
+\begin{large}
+FÍSICA COMPUTACIONAL 1 \\
+\end{large}
+\vspace*{0.2in}
+\rule{80mm}{0.1mm}\\
+\vspace*{0.1in}
+\begin{large}
+\textbf{Reporte 8\\ }
+\end{large}
+\vspace*{0.3in}
+\begin{large}
+Alumna: \\
+\vspace*{0.1in}
+Brambilla Zamorano Fátima Fernanda\\
+\end{large}
+\vspace*{0.3in}
+\rule{80mm}{0.1mm}\\
+\vspace*{0.1in}
+\begin{large}
+Fecha: \\ 16/04/18\\
+\end{large}
+\end{center}
+\end{center}
+\end{titlepage}
+
+\section {Introducción y Antecedentes}
+Para la octava sesión de Física Computacional 1, trabajamos con el modelo de Van de Pol, el cual es un modelo para un sistema oscilador con amortiguamiento no lineal, el cual explicaremos más adelante, después de mencionar algunos datos sobre los antecedentes del mismo. \\
+Balthasar Van der Pol fue un físico neerlandés, cuyos campos de investigación fueron la propagación de ondas, teoría de circuitos y física matemática, y su descubrimiento del oscilador que lleva su nombre le valió para recibir la medalla de honor del \textit{Institute of Radio Engineers}.
+La ecuación de Van der Pol es uno de los primeros descubrimientos de la \textit{Teoría del caos}, y esta a su vez tiene una larga historia en la física y la biología, sin embargo, no haremos mención de esta en este documento.
+
+\section {Modelo de Van de Pol}
+El oscilador de Van der Pol, es uno con amortiguamiento no lineal, y obedece a la siguiente ecuación de segundo orden:
+\begin{equation}
+\ddot x -\mu (1-x^2) \dot x +x = 0
+\end{equation}
+De donde, x es la posición en el tiempo, t es la función del tiempo, y $\mu$ es el amortiguamiento
+
+\section {Exploración de las soluciones del modelo en el Espacio Fase}
+En esta sección se presentará como se obtuvieron las gráficas correspondientes a la actividad, y estas mismas para su posterior discusión.
+Al igual que en las dos actividades anteriores, se definió un vector al principio del todo,con el cual estaríamos trabajando a lo largo de la actividad, dicho vector almacena el sistema de ecuaciones diferenciales. Se crearon varios tiempos dentro de un intervalo dado, también se definieron las condiciones iniciales y por último se resolvía el sistema de ecuaciones por medio de la función de \textit{odeint}.
+
+\section {Resultados y Discusión} 
+
+\section {Conclusiones del Estudio}
+
+\section {Ápendice}
+    \begin{itemize}
+    \item Este ejercicio pareciera simular al desarrollado en las actividades 6 y 7, ¿Qué aprendiste nuevo? \\ En esta actividad se utilizarón gráficos distintos a los que habíamos estado haciendo con anterioridad, de modo que puedo decir que he aprendido a hacer otros tipos de gráficos durante esta actividad, aunque me costo bastante entenderla.
+    \item ¿Qué fue lo que más te llamo la atención del oscilador de Van de Pol? \\ No hay algo que haya capturado más mi atención que otra cosa, pienso que todo el tema es bastante interesante.
+    \item Has escuchado ya hablar del caos. ¿Por qué sería importante estudiar este oscilador? \\ Creo que es importante estudiar este oscilador, y otros tipos de problemas de la misma naturaleza, ya que son los que más se aproximan a la realidad, puesto que en su mayoría durante los cursos que hemos tomado hasta el momento, se han trabajado problemas en situaciones ideales, es decir, sin tomar en cuenta cosas como la fricción en distintos medios, el movimiento de la tierra en caso de situaciones de movimiento de proyectil, entre otras.
+    \item ¿Qué mejorarías en esta actividad? \\ Quizás le haría una introducción a la actividad, explicando como trabajar con ella o con las gráficas que son necesarias generar, ya que fue esto lo que más problema me causo durante la actividad.
+    \item Algún comentario adicional antes de dejar de trabajar en Jupyter con Python? \\ Quisiera decir que trabajar en Python por medio de Jupyter ha sido bastante cómodo, aún si en realidad no he entendido del todo todo lo que hemos hecho, al final siento que he aprendido parte de lo necesario para poder manejarlo con más naturalidad de aquí en adelante.
+    \item Cerraremos la parte de tu trabajo con Python, ¿Qué te ha parecido? \\ Ha sido una grata experiencia, excepto en la evaluación pasada, y posbilemente en la siguiente.
+    \end{itemize}
+
+
+\end{document}
